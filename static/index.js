@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             tooltip: {},
             legend: {
-                data:['Numbers']
+                data:Object.keys(data)
             },
             xAxis: {
                 data: [1,2,3,4,5,6,7,8,9,10]
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             series: [{
                 name: 'Numbers',
                 type: 'bar',
-                data: data
+                data: Object.values(data)
             }]
         };
 
