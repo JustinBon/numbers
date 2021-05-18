@@ -84,6 +84,9 @@ def moveframes():
         todaysnumber = todaysnumbers[daynumb]
         shutil.move(PATH0+"\\frames\\"+file, PATH0+"\\"+numbers[todaysnumber-1]+"\\frames\\"+file)
 
+def readdatabase():
+    return np.load('todaysnumbers.npy',allow_pickle=True).item()
+
 downloadnewvids()
 findframes()
 findnumbers()
