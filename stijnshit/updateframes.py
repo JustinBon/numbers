@@ -16,14 +16,16 @@ with open("last checked.txt") as f:
     print(lastchecked)
 
 #exceptions
-todaysnumbers=np.load('todaysnumbers.npy',allow_pickle=True).item()
-todaysnumbers[0]=8
-todaysnumbers[2]=9
-todaysnumbers[30]=9
-todaysnumbers[51]=6
-todaysnumbers[6]=9
-todaysnumbers[99]=9
-np.save('todaysnumbers', todaysnumbers)
+def exceptions():
+    todaysnumbers=np.load('todaysnumbers.npy',allow_pickle=True).item()
+    todaysnumbers[0]=8
+    todaysnumbers[2]=9
+    todaysnumbers[30]=9
+    todaysnumbers[51]=6
+    todaysnumbers[6]=9
+    todaysnumbers[99]=9
+    todaysnumbers[256]=1
+    np.save('todaysnumbers', todaysnumbers)
 
 def date2number(file):
     date_name = [int(i) for i in file.split(' ')[-1].split('-')[0].split('_')]
@@ -88,7 +90,8 @@ def readdatabase():
     return np.load('todaysnumbers.npy',allow_pickle=True).item()
 
 downloadnewvids()
-findframes()
+# findframes()
 findnumbers()
+exceptions()
 moveframes()
 os.system('cleanup.bat')
