@@ -1,0 +1,1 @@
+"C:\Users\Stijn\AppData\Local\Programs\Python\Python38-32\python.exe" "C:\Users\Stijn\Code\todays number\updateframes.py"
