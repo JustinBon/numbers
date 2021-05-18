@@ -6,7 +6,33 @@
         <script src="static/index.js"></script>
     </head>
     <body >
-        <button id="get_data">click here for data</button>
+        <button id="get_data">Refresh data</button>
         <div id="main" style="width:1000px; height:400px;"></div>
+        <script>
+            var data = {{ data }};
+            var myChart = echarts.init(document.getElementById('main'));
+    
+            // specify chart configuration item and data
+            var option = {
+                title: {
+                    text: 'Today\'s number'
+                },
+                tooltip: {},
+                legend: {
+                    data:Object.keys(data)
+                },
+                xAxis: {
+                    data: [1,2,3,4,5,6,7,8,9,10]
+                },
+                yAxis: {},
+                series: [{
+                    name: 'Numbers',
+                    type: 'bar',
+                    data: Object.values(data)
+                }]
+            };
+
+            myChart.setOption(option);
+        </script>
     </body>
 </html>
