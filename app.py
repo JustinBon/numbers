@@ -26,7 +26,12 @@ def index():
 
 @app.route("/stats")
 def stats():
-    return render_template('stats.html')
+    result =  np.load('stijnshit\\todaysnumbers.npy',allow_pickle=True).item()
+    return render_template('stats.html', data = result)
+
+@app.route("/images")
+def images():
+    return render_template('images.html')
 
 
 @socketio.on('request data')

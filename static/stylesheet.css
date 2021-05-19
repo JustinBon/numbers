@@ -5,6 +5,7 @@
 #nav-items {
     box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
     color: white;
+    margin-right: 10px;
 }
 
 #background {
@@ -14,4 +15,8 @@
 #body {
     padding-left: 10px;
     padding-top: 10px;
+}
+
+#main {
+    padding-left: 10px;
 }

@@ -2,14 +2,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
-    socket.on('connect', () => {
-        document.querySelector('#get_data').onclick = () => {
-            socket.emit('request data');
-        };
-    });
+    var data = JSON.parse(window.localStorage.getItem("data"));
+    console.log(data)
+    localStorage.removeItem('data');
+    make_graph(data)
 
-    socket.on("send data", (data) => {
-        console.log(data)
+    function make_graph(data) {
+        console.log('test')
         var myChart = echarts.init(document.getElementById('main'));
     
         // specify chart configuration item and data
@@ -31,8 +30,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 data: Object.values(data)
             }]
         };
-
         myChart.setOption(option);
+    };
+
+    socket.on('connect', () => {
+        document.querySelector('#get_data').onclick = () => {
+            socket.emit('request data');
+        };
     });
+
+    socket.on("send data", (data) => {  
+        make_graph(data);
+    });
+
 
 });
