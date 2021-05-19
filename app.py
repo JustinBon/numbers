@@ -13,11 +13,6 @@ print('hello world')
 def index():
 
     result =  np.load('stijnshit\\todaysnumbers.npy',allow_pickle=True).item()
-    
-    # temp_list = [0 for x in range(10)]
-
-    # for item in list(result.values()):
-    #     temp_list[item - 1] += 1
 
     temp_dict = {}
 
@@ -29,12 +24,13 @@ def index():
 
     return render_template('index.html', data = temp_dict)
 
+@app.route("/stats")
+def stats():
+    return render_template('stats.html')
+
 
 @socketio.on('request data')
 def get_data():
-    # get your new data here and change the list to the new data
-    # list should be ordered from the first item being 1 and the last item being 10
-
     result =  np.load('stijnshit\\todaysnumbers.npy',allow_pickle=True).item()
     temp_dict = {}
 

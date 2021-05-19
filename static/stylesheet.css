@@ -1,0 +1,17 @@
+#nav-color {
+    background-color: darkslategray;
+}
+
+#nav-items {
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+#background {
+    background-color: #4d4d4d;
+}
+
+#body {
+    padding-left: 10px;
+    padding-top: 10px;
+}
