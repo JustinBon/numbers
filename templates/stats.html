@@ -12,4 +12,8 @@
 
 {% block body %}
 test test
+<script>
+    var data = {{ data }};
+    window.localStorage.setItem("data", JSON.stringify(data));
+</script>
 {% endblock %}

@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
     var data = JSON.parse(window.localStorage.getItem("data"));
-    console.log(data)
-    localStorage.removeItem('data');
     make_graph(data)
 
     function make_graph(data) {
