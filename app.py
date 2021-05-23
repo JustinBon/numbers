@@ -14,15 +14,7 @@ def index():
 
     result =  np.load('stijnshit\\todaysnumbers.npy',allow_pickle=True).item()
 
-    temp_dict = {}
-
-    for item in list(result.values()):
-        if item in temp_dict:
-            temp_dict[item] += 1
-        else:
-            temp_dict[item] = 1
-
-    return render_template('index.html', data = temp_dict)
+    return render_template('index.html', data = dict_counter(result))
 
 @app.route("/stats")
 def stats():
@@ -37,6 +29,10 @@ def images():
 @socketio.on('request data')
 def get_data():
     result =  np.load('stijnshit\\todaysnumbers.npy',allow_pickle=True).item()
+
+    emit('send data', dict_counter(result), broadcast=True)
+
+def dict_counter(result):
     temp_dict = {}
 
     for item in list(result.values()):
@@ -44,5 +40,4 @@ def get_data():
             temp_dict[item] += 1
         else:
             temp_dict[item] = 1
-
-    emit('send data', temp_dict, broadcast=True)
+    return temp_dict

@@ -11,7 +11,14 @@
 {% endblock %}
 
 {% block body %}
-test test
+<div style="width: 100%; display: table;">
+    <div style="display: table-row">
+        <div id="not-picked" style="width:1000px; height:400px; display: table-cell;"></div>
+        <div id="part-of-whole" style="width:1000px; height:400px; display: table-cell;"></div>
+    </div>
+</div>
+<div id="rolling-average" style="width:1000px; height:400px;"></div>
+
 <script>
     var data = {{ data }};
     window.localStorage.setItem("data", JSON.stringify(data));
