@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let result = {};
         data_func = data_func.reverse();
 
-        for (let i=1; i<10; i++){
+        for (let i=1; i<11; i++){
             let number = i;
             let max = 0;
             let counter = 0;
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function get_pie_values(numbers) {
         let counter = {};
-        for (let i=0; i<numbers.length; i++){
+        for (let i=1; i<numbers.length + 1; i++){
             let pick = numbers[i];
             if (pick in counter){
                 counter[pick]++;
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let temp_dict = {value: counter[x], name: x};
             result.push(temp_dict);
         };
-        console.log(result);
+        result.shift();
         return result;
     };
 
@@ -125,7 +125,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function update_not_picked_graph(data) {
         var values = not_picked(data);
-        console.log(values);
         // set up graph
         let myChart = echarts.init(document.getElementById('not-picked'));
         option = {
