@@ -104,12 +104,37 @@ def moveframes():
 def readdatabase():
     return np.load('todaysnumbers.npy',allow_pickle=True).item()
 
+def frequency(n):
+    freq=0
+    todaysnumbers = readdatabase()
+    for i in todaysnumbers.keys():
+        if todaysnumbers[i]==n:
+            freq+=1
+    return freq
+
 def makecollage():
-    return ""
+    for i in range(1,11):
+        cols, rows , _ = bestdim(frequency(i))
+        thumb_width = int(1920/cols)
+        thumb_height = int(1080/rows)
+        new_im= Image.new("RGB",(1920,1080))
+        ims = []
+        x, y, j = 0, 0, 0
+        for file in os.listdir(PATH0+"\\"+numbers[i-1]+"\\frames\\"):
+            im=Image.open(PATH0+"\\"+numbers[i-1]+"\\frames\\"+file)
+            ims.append(im.resize((thumb_width, thumb_height)))
+        print(len(ims))
+        for k in range(len(ims)):
+            x = thumb_width*(int(np.floor(k / rows)))
+            y = thumb_height* (k%rows)
+            new_im.paste(ims[j], (x, y))
+            j+=1
+        new_im.save(PATH0+"\\..\\static\\collage\\"+str(i)+".jpg")
 
 downloadnewvids()
 findframes()
 findnumbers()
 exceptions()
 moveframes()
+makecollage()
 os.system('cleanup.bat')
