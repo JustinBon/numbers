@@ -32,6 +32,20 @@ def date2number(file):
     date = datetime.date(date_name[2]+2000,date_name[0],date_name[1])
     return str((date - startdate).days)
 
+def bestdim(n):
+    dim = (0,0,0)
+    while True:
+        max_dim = int(np.ceil(n**0.5))
+        
+        for i in range(1,max_dim+1):
+            if i**2/n > 1:
+                break
+            if n % i == 0 and i**2/n > 0.5 and i**2/n > dim[2]:
+                dim=(i,int(n/i),i**2/n)
+        if dim[2] != 0:
+            return dim
+        n += 1
+
 def downloadnewvids():
     with open("last checked.txt") as f:
         lastchecked = f.read()
@@ -41,6 +55,7 @@ def downloadnewvids():
             lastchecked = str(int(date2number(file))+1)
     with open("last checked.txt","w") as f:
         f.write(lastchecked)
+
 
 def findframes():
     for file in os.listdir(PATH0+"\\vids"):
@@ -89,8 +104,11 @@ def moveframes():
 def readdatabase():
     return np.load('todaysnumbers.npy',allow_pickle=True).item()
 
+def makecollage():
+    return ""
+
 downloadnewvids()
-# findframes()
+findframes()
 findnumbers()
 exceptions()
 moveframes()
