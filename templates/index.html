@@ -19,6 +19,13 @@
 </div>
 
 <div id="main" style="width:1000px; height:400px;"></div>
+<div id="image">
+    <h3>
+        Today's number
+    </h3>
+    <img id="image-source" src="{{url_for('static', filename='today/today.jpg')}}" alt="Todays number" width="800">
+</div>
+
 
 <script>
     var data = {{ data }};

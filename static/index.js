@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     make_graph(data)
 
     function make_graph(data) {
-        console.log('test')
         var myChart = echarts.init(document.getElementById('main'));
     
         // specify chart configuration item and data
@@ -40,6 +39,5 @@ document.addEventListener('DOMContentLoaded', function() {
     socket.on("send data", (data) => {  
         make_graph(data);
     });
-
 
 });

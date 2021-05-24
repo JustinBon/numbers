@@ -10,5 +10,13 @@
 {% endblock %}
 
 {% block body %}
-test test
+<select name="numbers" id="numbers">
+    {% for i in range(10) %}
+    <option value="{{ i + 1 }}">{{i + 1}}</option>
+    {% endfor %}
+</select>
+
+<div id="image">
+
+</div>
 {% endblock %}

@@ -4,8 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // get data on page load
     var raw_data = JSON.parse(window.localStorage.getItem('data'));
-    var data = Object.values(raw_data);
-
+    let data = Object.values(raw_data);
     // sum function
     function sum(total, num) {
         return total + num;
@@ -58,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             result[number] = max;
         };
+        data_func = data_func.reverse();
         return result;
     };
 
@@ -81,8 +81,39 @@ document.addEventListener('DOMContentLoaded', function() {
         return result;
     };
 
+    function last_picked(data_func) {
+        data_func = data_func.reverse();
+        var result = {};
+        console.log(data_func)
+
+        for (let i=0; i<data_func.length; i++) {
+            if (!(data_func[i] in result)) {
+                result[data_func[i]] = i;
+            };
+            if (Object.keys(result).length == 10){
+                break;
+            };
+        };
+        data_func = data_func.reverse();
+        return result;
+    };
+
+    function get_median(func_data) {
+        var median = [];
+        median.push(func_data[0]);
+        for(i=0;i<func_data.length;i++){
+            var arr = func_data.slice(0,i+1);
+
+            const mid = Math.floor(arr.length / 2),
+            nums = [...arr].sort((a, b) => a - b);
+            median.push(arr.length % 2 !== 0 ? nums[mid] : (nums[mid - 1] + nums[mid]) / 2);
+        };
+        return median;
+    };
+
     function update_graph(data) {
         var rolling_average = get_rolling_average(data);
+        var median = get_median(data);
 
         var x_values = [];
         for(i=1;i<rolling_average.length + 1;i++) {
@@ -99,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 trigger: 'axis'
             },
             legend: {
-                data: ['Average over time', 'Picked number']
+                data: ['Average', 'Picked number', 'Median']
             },
             xAxis: {
                 type: 'category',
@@ -111,12 +142,17 @@ document.addEventListener('DOMContentLoaded', function() {
             series: [{
                 data: rolling_average,
                 type: 'line',
-                name: 'Average over time'
+                name: 'Average'
             },
             {
                 data: data,
                 type: 'bar',
                 name: 'Picked number'
+            },
+            {
+                data: median,
+                type: 'line',
+                name: 'Median'
             }]
         };
 
@@ -125,17 +161,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function update_not_picked_graph(data) {
         var values = not_picked(data);
+        var values2 = last_picked(data);
         // set up graph
         let myChart = echarts.init(document.getElementById('not-picked'));
         option = {
             title: {
-                text: 'Longest time not picked'
+                text: 'Time not picked'
             },
             tooltip: {
                 trigger: 'axis'
             },
             legend: {
-                data: ['Number of days not picked',]
+                data: ['Max days not picked','Days since last picked']
             },
             yAxis: {
                 type: 'category',
@@ -150,7 +187,12 @@ document.addEventListener('DOMContentLoaded', function() {
             series: [{
                 data: Object.values(values),
                 type: 'bar',
-                name: 'Days not picked'
+                name: 'Max days not picked'
+            },
+            {
+               data: Object.values(values2),
+               type: 'bar',
+               name: 'Days since last picked' 
             }]
         };
 
