@@ -8,9 +8,9 @@
     margin-right: 10px;
 }
 
-/* #background {
+#background {
     background-color: #000000;
-} */
+}
 
 #body {
     padding-left: 10px;
@@ -27,5 +27,5 @@
 
 #image-source {
     padding-top: 10px;
-    width: 800px;
+    width: 1500px;
 }

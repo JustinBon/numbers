@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var source = "static/collage/" + image_id + ".jpg"
 
         document.querySelector("#image-source").src = source;
-        document.querySelector("#image-source").style.width = "800";
+        document.querySelector("#image-source").style.width = "1600";
 
     };
 
