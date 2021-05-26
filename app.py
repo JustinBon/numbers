@@ -12,13 +12,13 @@ print('hello world')
 @app.route("/")
 def index():
 
-    result =  np.load('stijnshit\\todaysnumbers.npy',allow_pickle=True).item()
+    result =  np.load('stijnshit/todaysnumbers.npy',allow_pickle=True).item()
 
     return render_template('index.html', data = dict_counter(result))
 
 @app.route("/stats")
 def stats():
-    result =  np.load('stijnshit\\todaysnumbers.npy',allow_pickle=True).item()
+    result =  np.load('stijnshit/todaysnumbers.npy',allow_pickle=True).item()
     return render_template('stats.html', data = result)
 
 @app.route("/images")
@@ -28,7 +28,7 @@ def images():
 
 @socketio.on('request data')
 def get_data():
-    result =  np.load('stijnshit\\todaysnumbers.npy',allow_pickle=True).item()
+    result =  np.load('stijnshit/todaysnumbers.npy',allow_pickle=True).item()
 
     emit('send data', dict_counter(result), broadcast=True)
 
